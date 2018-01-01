@@ -1,0 +1,9 @@
+
+lee_nexus5:
+  hide_if_away: false
+  icon:
+  mac:
+  name: lee
+  picture:
+  track: true
+  vendor:

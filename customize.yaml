@@ -1,0 +1,41 @@
+media_player.bedroom_tv:
+  hidden: true
+switch.coffee_maker_downstairs:
+  friendly_name: Coffee
+  google_assistant: true
+  google_assistant_name: coffee
+switch.relay__button_1_1:
+  friendly_name: Basement Door Lights
+  google_assistant: true
+  google_assistant_name: basement light
+light.deck_westside_light:
+  friendly_name: Deck Westside Light
+  google_assistant: true
+  google_assistant_name: deck light
+sensor.tempsensorrfm95_202_2:
+  friendly_name: Pump House Temp.
+binary_sensor.deck_westside_cam_control:
+  hidden: true
+automation.deck_west_side_30min:
+  hidden: true
+automation.deck_westside_cam_control_off:
+  hidden: true
+automation.deck_westside_cam_control_on:
+  hidden: true
+automation.coffee_on_when_not_home:
+  hidden: true
+automation.coffe_on_when_not_home:
+  hidden: true
+automation.slack_basement_door_light_on:
+  hidden: true
+automation.outside_lights_on_when_arriving_home:
+  hidden: true
+automation.slack_coffee_on:
+  hidden: true
+sensor.deck_westside_cam_filename:
+  hidden: true
+sensor.shoprfm95_201_2:
+  friendly_name: Shop Temp.
+sensor.shoprfm95_201_3:
+  friendly_name: Shop Light Level
+

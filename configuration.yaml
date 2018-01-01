@@ -1,0 +1,167 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 45.9553
+  longitude: -122.7622
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 300
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+  trusted_networks: 192.168.42.0/24
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+#map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+#sensor:
+#  - platform: yr
+
+# Text to speech
+tts:
+  - platform: google
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+mqtt:
+  broker: 192.168.42.2
+
+light:
+  - platform: yeelight
+    devices:
+      192.168.42.130:
+        name: Deck Westside Light
+
+switch:
+  - platform: rpi_gpio
+    ports:
+      24: Coffee Maker Downstairs
+
+mysensors:
+  gateways:
+    - device: '192.168.42.129'
+      tcp_port: 5003
+      persistence_file: "/home/homeassistant/mysensors_wifi.json"
+    - device: /dev/ttyS0
+      baud_rate: 9600
+      persistence_file: "/home/homeassistant/mysensors_ttyS0.json"
+  optimistic: false
+  persistence: true
+  retain: true
+  version: '2.0'
+
+binary_sensor:
+  - platform: mqtt
+    name: "Deck Westside Cam Control"
+    state_topic: "home/westdeck/light/power"
+    payload_on: "ON"
+    payload_off: "OFF"
+    qos: 2
+  - platform: rpi_gpio
+    ports:
+      25: Coffee Switch
+
+sensor:
+  - platform: mqtt
+    name: "Deck Westside Cam Filename"
+    state_topic: "home/westdeck/cam/filename"
+  - platform: mqtt
+    name: "Outside Under Deck Temp."
+    state_topic: "weewx/loop"
+    unit_of_measurement: '°F'
+    value_template: '{{ value_json.outTemp_F }}'
+  - platform: mqtt
+    name: "Inside Basement Temp."
+    state_topic: "weewx/loop"
+    unit_of_measurement: '°F'
+    value_template: '{{ value_json.inTemp_F }}'
+  - platform: yr
+    
+#camera:
+#  - platform: local_file
+#    name: "Westside Deck Camera"
+#    filepath: /media/cams/source/deck/tmp.jpg
+#    #filepath: "/media/cams/source/deck/source/{{ ('sensor.deck_westside_cam_filename') }}"
+
+history_graph:
+  gr1:
+    name: Temperatures
+    entities:
+      - sensor.tempsensorrfm95_202_2
+      - sensor.shoprfm95_201_2
+      - sensor.outside_under_deck_temp
+      - sensor.inside_basement_temp
+    #  - sensor.inside_temperature
+    hours_to_show: 72
+    # refresh: 0
+
+google_assistant:
+    project_id: nelnet.org:api-project-518332665370
+    client_id: AU4YPWYmng4KT5FXoMJVyBOYqhqhcpVJPWqPvLQlil3buMOF40LrdXWcVyj2jMBe3q0V6I91fH0F1fuq
+    access_token: Hu4gEKw8Ce74YQtrnjjoVbrAT4Ilh7BikvhI4ZorxJmxCQDjZgS34hrvNk7mqYv4VmbjbgMEM3SsO9xj
+    agent_user_id: lnelson@nelnet.org
+#    api_key: [an API Key generated for the Google Actions project]
+    exposed__by_default: false
+
+notify:
+    - name: slack
+      platform: slack
+      api_key: xoxb-287551336241-R2bTCdIVieu1QLCMwVWjKcDn
+      default_channel: '#homeassistant'
+
+device_tracker:
+    - platform: owntracks_http
+      max_gps_accuracy: 200
+      waypoints: True
+
+zone:
+    - name: Home
+      latitude: 45.9553
+      longitude: -122.7622
+      radius: 500
+      icon: mdi:home
+

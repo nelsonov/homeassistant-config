@@ -1,0 +1,132 @@
+- alias: 'Deck Westside Cam Control ON'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.deck_westside_cam_control
+    from: 'off'
+    to: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.deck_westside_light
+
+- alias: 'Deck Westside Cam Control OFF'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.deck_westside_cam_control
+    from: 'on'
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: light.deck_westside_light
+
+- alias: 'Deck West Side 30min'
+  trigger:
+    platform: state
+    entity_id: light.deck_westside_light
+    to: 'on'
+    for:
+      minutes: 30
+  action:
+    service: light.turn_off
+    entity_id: light.deck_westside_light
+
+#- alias: 'Coffee On'
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.coffee_switch
+#    to: 'on'
+#  condition: 
+#    condition: state
+#    entity_id: switch.coffee_maker_downstairs
+#    state: 'off'
+#  action:
+#    service: switch.turn_on
+#    data: 
+#      entity_id: switch.coffee_maker_downstairs
+
+#- alias: 'Coffee Off'
+#  trigger:
+#    platform: state
+#    entity_id: binary_sensor.coffee_switch
+#    to: 'on'
+#  condition: 
+#    condition: state
+#    entity_id: switch.coffee_maker_downstairs
+#    state: 'on'
+#  action:
+#    service: switch.turn_off
+#    data: 
+#      entity_id: switch.coffee_maker_downstairs
+
+- alias: 'Coffee Maker 3hr'
+  trigger:
+    platform: state
+    entity_id: switch.coffee_maker_downstairs
+    to: 'on'
+    for:
+      hours: 3
+  action:
+    service: switch.turn_off
+    entity_id: switch.coffee_maker_downstairs
+
+- alias: 'Basement Door 30min'
+  trigger:
+    platform: state
+    entity_id: switch.relay__button_1_1
+    to: 'on'
+    for:
+      minutes: 30
+  action:
+    service: switch.turn_off
+    entity_id: switch.relay__button_1_1
+
+- alias: 'Slack Coffee On'
+  trigger:
+    platform: state
+    entity_id: switch.coffee_maker_downstairs
+    to: 'on'
+  action:
+    - service: notify.slack
+      data:
+        message: '@lnelson Coffee Maker Turned On'
+
+- alias: 'Slack Basement Door Light On'
+  trigger:
+    platform: state
+    entity_id: switch.relay__button_1_1
+    to: 'on'
+  action:
+    - service: notify.slack
+      data:
+        message: '@lnelson Basement Door Light Turned On'
+
+- alias: 'Outside Lights on when arriving home'
+  trigger:
+    platform: state
+    entity_id: device_tracker.lee_nexus5
+    from: 'not_home'
+    to: 'home'
+  condition:
+    condition: sun
+    after: sunset
+  action:
+    - service: light.turn_on
+      entity_id: light.deck_westside_light
+    - service: switch.turn_on
+      entity_id: switch.relay__button_1_1
+
+- alias: 'Coffee On when Not Home'
+  trigger:
+    platform: state
+    entity_id: device_tracker.lee_nexus5
+    to: 'not_home'
+    for:
+      minutes: 10
+  condition:
+    condition: state
+    entity_id: switch.coffee_maker_downstairs
+    state: 'on'
+  action:
+    - service: notify.slack
+      data:
+        message: '@lnelson Coffee Still On'
+
