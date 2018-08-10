@@ -49,7 +49,23 @@ history:
 # View all events in a logbook
 logbook:
 
-# Enables a map showing the location of tracked devices
+recorder:
+  #  db_url: mysql://homeassistant:homeassistdb@192.168.42.2/homeassistant
+  purge_keep_days: 8
+  purge_interval: 1
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+    entities:
+      - sun.sun # Don't record sun data
+      - sensor.date
+      - device_tracker.lee_nexus5
+      - device_tracker.lee_nexus5_ping
+      - sensor.deck_westside_cam_filename
+      - device_tracker.nexus_5
+  # Enables a map showing the location of tracked devices
 #map:
 
 # Track the sun
@@ -75,18 +91,78 @@ light:
     devices:
       192.168.42.130:
         name: Deck Westside Light
-
+  - platform: mqtt
+    name: "Basement Fluorescent"
+    state_topic: "basement/light/fluorescent/stat/POWER"
+    command_topic: "basement/light/fluorescent/cmnd/power"
+    availability_topic: "basement/light/fluorescent/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+  - platform: mqtt
+    name: "Bedroom Front Light"
+    state_topic: "bedroom/light/front/stat/POWER"
+    command_topic: "bedroom/light/front/cmnd/power"
+    availability_topic: "bedroom/light/front/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+  - platform: mqtt
+    name: "Bedroom Rear Light"
+    state_topic: "bedroom/light/rear/stat/POWER"
+    command_topic: "bedroom/light/rear/cmnd/power"
+    availability_topic: "bedroom/light/rear/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+    
 switch:
   - platform: rpi_gpio
     ports:
       24: Coffee Maker Downstairs
+    invert_logic: true
+
+  - platform: mqtt
+    name: "Bedroom Monitors"
+    state_topic: "bedroom/devices/monitors/stat/POWER"
+    command_topic: "bedroom/devices/monitors/cmnd/power"
+    availability_topic: "bedroom/devices/monitors/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+    
+  - platform: mqtt
+    name: "Basement Mini TV"
+    state_topic: "basement/devices/mini-tv/stat/POWER"
+    command_topic: "basement/devices/mini-tv/cmnd/power"
+    availability_topic: "basement/devices/mini-tv/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+    
 
 mysensors:
   gateways:
     - device: '192.168.42.129'
       tcp_port: 5003
       persistence_file: "/home/homeassistant/mysensors_wifi.json"
-    - device: /dev/ttyS0
+#    - device: /dev/ttyS0
+    - device: /dev/ttyAMA0
       baud_rate: 9600
       persistence_file: "/home/homeassistant/mysensors_ttyS0.json"
   optimistic: false
@@ -104,6 +180,7 @@ binary_sensor:
   - platform: rpi_gpio
     ports:
       25: Coffee Switch
+    invert_logic: true
 
 sensor:
   - platform: mqtt
@@ -119,7 +196,16 @@ sensor:
     state_topic: "weewx/loop"
     unit_of_measurement: '°F'
     value_template: '{{ value_json.inTemp_F }}'
-  - platform: yr
+
+input_datetime:
+  coffee_start:
+    name: Coffee Start Time
+    has_time: true
+    has_date: false
+
+input_boolean:
+  coffee_timer_enable:
+    name: Enable Coffee Timer
     
 #camera:
 #  - platform: local_file
@@ -149,19 +235,34 @@ google_assistant:
 
 notify:
     - name: slack
+      username: home
       platform: slack
-      api_key: xoxb-287551336241-R2bTCdIVieu1QLCMwVWjKcDn
+      api_key: !secret slack_api_key
       default_channel: '#homeassistant'
 
 device_tracker:
     - platform: owntracks_http
       max_gps_accuracy: 200
       waypoints: True
-
+    - platform: bluetooth_tracker
+    - platform: ping
+      hosts:
+        lee_galaxys8_ping: 192.168.42.190
+      interval_seconds: 30
+      consider_home: 600
+      
 zone:
     - name: Home
       latitude: 45.9553
       longitude: -122.7622
       radius: 500
       icon: mdi:home
+logger:
+  default: info
+  logs:
+    homeassistant.components.mysensors: debug
+    mysensors: debug
 
+media_player:
+    - platform: braviatv
+      host: 192.168.42.101

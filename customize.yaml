@@ -1,13 +1,21 @@
 media_player.bedroom_tv:
   hidden: true
 switch.coffee_maker_downstairs:
-  friendly_name: Coffee
+  friendly_name: Coffee On/Off
   google_assistant: true
   google_assistant_name: coffee
+switch.coffee_espresso_10_1:
+  friendly_name: Espresso On/Off
+  google_assistant: true
+  google_assistant_name: espresso
+light.basement_fluorescent:
+  friendly_name: Basement Fluorescent Lights
+  google_assistant: true
+  google_assistant_name: basement lights
 switch.relay__button_1_1:
   friendly_name: Basement Door Lights
   google_assistant: true
-  google_assistant_name: basement light
+  google_assistant_name: basement door light
 light.deck_westside_light:
   friendly_name: Deck Westside Light
   google_assistant: true
@@ -32,10 +40,33 @@ automation.outside_lights_on_when_arriving_home:
   hidden: true
 automation.slack_coffee_on:
   hidden: true
+automation.coffee_maker_3hr:
+  friendly_name: Turn off after 3hrs
+automation.coffee_timer:
+  hidden: true
 sensor.deck_westside_cam_filename:
   hidden: true
 sensor.shoprfm95_201_2:
   friendly_name: Shop Temp.
 sensor.shoprfm95_201_3:
   friendly_name: Shop Light Level
-
+automation.coffee_button_onoff:
+  hidden: true
+binary_sensor.coffee_switch:
+  hidden: true
+device_tracker.nexus5:
+  hidden: true
+device_tracker.qcyqy19:
+  hidden: true
+device_tracker.garmin_drivesmart_3946630105:
+  hidden: true
+device_tracker.bluetooth_mouse:
+  hidden: true
+group.all_automations:
+  hidden: false
+group.all_devices:
+  hidden: false
+group.all_lights:
+  hidden: false
+group.all_switches:
+  hidden: false

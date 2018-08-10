@@ -1,4 +1,4 @@
-- alias: 'Deck Westside Cam Control ON'
+- alias: Deck Westside Cam Control ON
   trigger:
     platform: state
     entity_id: binary_sensor.deck_westside_cam_control
@@ -7,8 +7,7 @@
   action:
     service: light.turn_on
     entity_id: light.deck_westside_light
-
-- alias: 'Deck Westside Cam Control OFF'
+- alias: Deck Westside Cam Control OFF
   trigger:
     platform: state
     entity_id: binary_sensor.deck_westside_cam_control
@@ -17,8 +16,7 @@
   action:
     service: light.turn_off
     entity_id: light.deck_westside_light
-
-- alias: 'Deck West Side 30min'
+- alias: Deck West Side 30min
   trigger:
     platform: state
     entity_id: light.deck_westside_light
@@ -28,36 +26,16 @@
   action:
     service: light.turn_off
     entity_id: light.deck_westside_light
-
-#- alias: 'Coffee On'
-#  trigger:
-#    platform: state
-#    entity_id: binary_sensor.coffee_switch
-#    to: 'on'
-#  condition: 
-#    condition: state
-#    entity_id: switch.coffee_maker_downstairs
-#    state: 'off'
-#  action:
-#    service: switch.turn_on
-#    data: 
-#      entity_id: switch.coffee_maker_downstairs
-
-#- alias: 'Coffee Off'
-#  trigger:
-#    platform: state
-#    entity_id: binary_sensor.coffee_switch
-#    to: 'on'
-#  condition: 
-#    condition: state
-#    entity_id: switch.coffee_maker_downstairs
-#    state: 'on'
-#  action:
-#    service: switch.turn_off
-#    data: 
-#      entity_id: switch.coffee_maker_downstairs
-
-- alias: 'Coffee Maker 3hr'
+- alias: Coffee Button On/Off
+  trigger:
+    platform: state
+    entity_id: binary_sensor.coffee_switch
+    to: 'on'
+  action:
+    service: switch.toggle
+    data:
+      entity_id: switch.coffee_maker_downstairs
+- alias: Coffee Maker 3hr
   trigger:
     platform: state
     entity_id: switch.coffee_maker_downstairs
@@ -67,58 +45,81 @@
   action:
     service: switch.turn_off
     entity_id: switch.coffee_maker_downstairs
-
-- alias: 'Basement Door 30min'
+- alias: Espresso Button On
   trigger:
     platform: state
-    entity_id: switch.relay__button_1_1
+    entity_id: switch.coffee_espresso_10_1
+    to: 'on'
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.coffee_espresso_10_1
+- alias: Espresso Button Off
+  trigger:
+    platform: state
+    entity_id: switch.coffee_espresso_10_1
+    to: 'off'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.coffee_espresso_10_1
+- alias: Coffee Maker 3hr
+  trigger:
+    platform: state
+    entity_id: switch.coffee_maker_downstairs
+    to: 'on'
+    for:
+      hours: 3
+  action:
+    service: switch.turn_off
+    entity_id: switch.coffee_maker_downstairs
+- alias: Espresso Machine 30min
+  trigger:
+    platform: state
+    entity_id: switch.coffee_espresso_10_1
     to: 'on'
     for:
       minutes: 30
   action:
     service: switch.turn_off
-    entity_id: switch.relay__button_1_1
-
-- alias: 'Slack Coffee On'
+    entity_id: switch.coffee_espresso_10_1
+- alias: Slack Coffee On
   trigger:
     platform: state
     entity_id: switch.coffee_maker_downstairs
     to: 'on'
   action:
-    - service: notify.slack
-      data:
-        message: '@lnelson Coffee Maker Turned On'
-
-- alias: 'Slack Basement Door Light On'
+  - service: notify.slack
+    data:
+      message: '@lnelson Coffee Maker Turned On'
+- alias: Slack Espresso On
   trigger:
     platform: state
-    entity_id: switch.relay__button_1_1
+    entity_id: switch.coffee_espresso_10_1
     to: 'on'
   action:
-    - service: notify.slack
-      data:
-        message: '@lnelson Basement Door Light Turned On'
-
-- alias: 'Outside Lights on when arriving home'
+  - service: notify.slack
+    data:
+      message: '@lnelson Espresso Machine Turned On'
+- alias: Outside Lights on when arriving home
   trigger:
     platform: state
-    entity_id: device_tracker.lee_nexus5
-    from: 'not_home'
-    to: 'home'
+    entity_id: device_tracker.lee_nexus5, device_tracker.lee_nexus5_ping
+    from: not_home
+    to: home
   condition:
     condition: sun
     after: sunset
   action:
-    - service: light.turn_on
-      entity_id: light.deck_westside_light
-    - service: switch.turn_on
-      entity_id: switch.relay__button_1_1
-
-- alias: 'Coffee On when Not Home'
+  - service: light.turn_on
+    entity_id: light.deck_westside_light
+  - service: switch.turn_on
+    entity_id: switch.relay__button_1_1
+- alias: Coffee On when Not Home
   trigger:
     platform: state
     entity_id: device_tracker.lee_nexus5
-    to: 'not_home'
+    to: not_home
     for:
       minutes: 10
   condition:
@@ -126,7 +127,101 @@
     entity_id: switch.coffee_maker_downstairs
     state: 'on'
   action:
-    - service: notify.slack
-      data:
-        message: '@lnelson Coffee Still On'
+  - service: notify.slack
+    data:
+      message: '@lnelson Coffee Still On'
 
+- alias: Coffee Timer
+  trigger:
+    platform: time
+    minutes: '/1'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.coffee_timer_enable
+        state: 'on'
+      - condition: template
+        value_template: '{{ now().hour == (states.input_datetime.coffee_start.attributes.hour  | round(0)) and  now().minute == (states.input_datetime.coffee_start.attributes.minute  | round(0) )  }}'
+  action:
+    service: switch.turn_on
+    entity_id: switch.coffee_maker_downstairs
+
+- alias: Bedroom Lights Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '2'
+  action:
+  - service: homeassistant.toggle
+    entity_id: group.bedroomlights
+
+- alias: Basement Lights Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '3'
+  action:
+  - service: light.toggle
+    entity_id: light.basement_fluorescent
+
+- alias: Basement TV Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '4'
+  action:
+  - service: switch.toggle
+    entity_id: switch.basement_mini_tv
+
+- alias: Bedroom Monitors Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '5'
+  action:
+  - service: switch.toggle
+    entity_id: switch.bedroom_monitors
+
+- alias: Coffee Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '6'
+  action:
+  - service: switch.toggle
+    entity_id: switch.coffee_maker_downstairs
+
+- alias: Espresso Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '7'
+  action:
+  - service: switch.toggle
+    entity_id: switch.coffee_espresso_10_1
+
+- alias: Bedroom Front Light Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '8'
+  action:
+  - service: light.toggle
+    entity_id: light.bedroom_front_light
+
+- alias: Bedroom Rear Light Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '9'
+  action:
+  - service: light.toggle
+    entity_id: light.bedroom_rear_light
+
+    
+
+
+
+
+    

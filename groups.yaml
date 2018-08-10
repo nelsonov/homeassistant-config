@@ -1,0 +1,119 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.coffeetimer
+    - group.basementlights
+    - group.bedroomlights
+    - group.outsidelights
+    - group.presence
+
+coffeeview:
+  name: Coffee
+  view: yes
+  icon: mdi:coffee
+  entities:
+    - group.coffeetimer
+
+lightview:
+  name: Lights
+  view: yes
+  icon: mdi:lightbulb
+  entities:
+    - group.basementlights
+    - group.bedroomlights
+    - group.outsidelights
+
+mediaview:
+  name: Media
+  view: yes
+  icon: mdi:television-classic
+  entities:
+    - group.televisions
+    - group.monitors
+
+weatherview:
+  name: Weather View
+  view: yes
+  icon: mdi:weather-cloudy
+  entities:
+    - group.weather
+
+alllights:
+  name: Lights
+  view: yes
+  entities:
+    - group.all_lights
+
+allswitches:
+  name: Switches
+  view: yes
+  entities:
+    - group.all_switches
+
+alldevices:
+  name: Devices
+  view: yes
+  entities:
+    - group.all_devices
+
+allautomations:
+  name: Automations
+  view: yes
+  entities:
+    - group.all_automations
+ 
+coffeetimer:
+  name: Coffee Timer
+  entities:
+    - switch.coffee_maker_downstairs
+    - input_boolean.coffee_timer_enable
+    - input_datetime.coffee_start
+    - automation.coffee_maker_3hr
+    - switch.coffee_espresso_10_1
+    - automation.espresso_machine_30min
+
+outsidelights:
+  name: Outdoor Lights
+  entities:
+    - light.deck_westside_light
+    - switch.relay__button_1_1
+    - automation.basement_door_30min
+
+basementlights:
+  name: Basement Lights
+  entities:
+    - light.basement_fluorescent
+
+bedroomlights:
+  name: Bedroom Lights
+  entities:
+    - light.bedroom_front_light
+    - light.bedroom_rear_light
+
+weather:
+  name: Weather
+  entities:
+    - sensor.inside_basement_temp
+    - sensor.outside_under_deck_temp
+    - sensor.pumphouserfm95_202_2
+    - sensor.shoprfm95_201_2
+    - sensor.shoprfm95_201_3
+    - sun.sun
+    - history_graph.temperatures
+
+presence:
+  name: Presence
+  entities:
+    - device_tracker.lee_galaxys8
+    - device_tracker.lee_galaxys8_ping
+
+televisions:
+  name: Televisions
+  entities:
+    - switch.basement_mini_tv
+
+monitors:
+  name: Monitors
+  entities:
+    - switch.bedroom_monitors

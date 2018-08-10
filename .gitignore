@@ -1,4 +1,5 @@
 #homeassistant
+entity_registry.yaml
 secrets.yaml
 *json
 *db
