@@ -26,25 +26,34 @@
   action:
     service: light.turn_off
     entity_id: light.deck_westside_light
-- alias: Coffee Button On/Off
-  trigger:
+- alias: Coffee Button On
+  trigger: 
     platform: state
-    entity_id: binary_sensor.coffee_switch
+    entity_id: switch.coffee_espresso_10_0
     to: 'on'
   action:
-    service: switch.toggle
+    service: switch.turn_on
     data:
-      entity_id: switch.coffee_maker_downstairs
+      entity_id: switch.coffee_espresso_10_0
+- alias: Coffee Button Off
+  trigger: 
+    platform: state
+    entity_id: switch.coffee_espresso_10_0
+    to: 'off'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.coffee_espresso_10_0
 - alias: Coffee Maker 3hr
   trigger:
     platform: state
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
     to: 'on'
     for:
       hours: 3
   action:
     service: switch.turn_off
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
 - alias: Espresso Button On
   trigger:
     platform: state
@@ -66,13 +75,13 @@
 - alias: Coffee Maker 3hr
   trigger:
     platform: state
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
     to: 'on'
     for:
       hours: 3
   action:
     service: switch.turn_off
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
 - alias: Espresso Machine 30min
   trigger:
     platform: state
@@ -86,12 +95,21 @@
 - alias: Slack Coffee On
   trigger:
     platform: state
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
     to: 'on'
   action:
   - service: notify.slack
     data:
       message: '@lnelson Coffee Maker Turned On'
+- alias: Slack Coffee Off
+  trigger:
+    platform: state
+    entity_id: switch.coffee_espresso_10_0
+    to: 'off'
+  action:
+  - service: notify.slack
+    data:
+      message: '@lnelson Coffee Maker Turned Off'
 - alias: Slack Espresso On
   trigger:
     platform: state
@@ -101,6 +119,15 @@
   - service: notify.slack
     data:
       message: '@lnelson Espresso Machine Turned On'
+- alias: Slack Espresso Off
+  trigger:
+    platform: state
+    entity_id: switch.coffee_espresso_10_1
+    to: 'off'
+  action:
+  - service: notify.slack
+    data:
+      message: '@lnelson Espresso Machine Turned Off'
 - alias: Outside Lights on when arriving home
   trigger:
     platform: state
@@ -118,13 +145,13 @@
 - alias: Coffee On when Not Home
   trigger:
     platform: state
-    entity_id: device_tracker.lee_nexus5
+    entity_id: device_tracker.lee_galaxys8
     to: not_home
     for:
       minutes: 10
   condition:
     condition: state
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
     state: 'on'
   action:
   - service: notify.slack
@@ -190,7 +217,7 @@
     to: '6'
   action:
   - service: switch.toggle
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
 
 - alias: Espresso Remote
   trigger:

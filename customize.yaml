@@ -1,6 +1,6 @@
 media_player.bedroom_tv:
   hidden: true
-switch.coffee_maker_downstairs:
+switch.coffee_espresso_10_0:
   friendly_name: Coffee On/Off
   google_assistant: true
   google_assistant_name: coffee
@@ -12,6 +12,15 @@ light.basement_fluorescent:
   friendly_name: Basement Fluorescent Lights
   google_assistant: true
   google_assistant_name: basement lights
+light.bedroom_front_light:
+  google_assistant: true
+  google_assistant_name: bedroom front
+light.bedroom_rear_light:
+  google_assistant: true
+  google_assistant_name: bedroom rear
+group.bedroomlights:
+  google_assistant: true
+  google_assistant_name: bedroom lights
 switch.relay__button_1_1:
   friendly_name: Basement Door Lights
   google_assistant: true
@@ -20,6 +29,12 @@ light.deck_westside_light:
   friendly_name: Deck Westside Light
   google_assistant: true
   google_assistant_name: deck light
+switch.basement_mini_tv:
+  google_assistant: true
+  google_assistant_name: basement tv
+switch.bedroom_monitors:
+  google_assistant: true
+  google_assistant_name: monitors
 sensor.tempsensorrfm95_202_2:
   friendly_name: Pump House Temp.
 binary_sensor.deck_westside_cam_control:

@@ -52,3 +52,11 @@ bluetooth_mouse:
   picture:
   track: false
   vendor: unknown
+
+lee_galaxys8_ping:
+  hide_if_away: false
+  icon:
+  mac:
+  name: lee galaxys8 ping
+  picture:
+  track: true

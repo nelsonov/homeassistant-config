@@ -126,11 +126,6 @@ light:
     retain: false
     
 switch:
-  - platform: rpi_gpio
-    ports:
-      24: Coffee Maker Downstairs
-    invert_logic: true
-
   - platform: mqtt
     name: "Bedroom Monitors"
     state_topic: "bedroom/devices/monitors/stat/POWER"
@@ -177,10 +172,6 @@ binary_sensor:
     payload_on: "ON"
     payload_off: "OFF"
     qos: 2
-  - platform: rpi_gpio
-    ports:
-      25: Coffee Switch
-    invert_logic: true
 
 sensor:
   - platform: mqtt
@@ -227,8 +218,8 @@ history_graph:
 
 google_assistant:
     project_id: nelnet.org:api-project-518332665370
-    client_id: AU4YPWYmng4KT5FXoMJVyBOYqhqhcpVJPWqPvLQlil3buMOF40LrdXWcVyj2jMBe3q0V6I91fH0F1fuq
-    access_token: Hu4gEKw8Ce74YQtrnjjoVbrAT4Ilh7BikvhI4ZorxJmxCQDjZgS34hrvNk7mqYv4VmbjbgMEM3SsO9xj
+    client_id: !secret google_client_id
+    access_token: !secret google_access_token
     agent_user_id: lnelson@nelnet.org
 #    api_key: [an API Key generated for the Google Actions project]
     exposed__by_default: false
@@ -263,6 +254,3 @@ logger:
     homeassistant.components.mysensors: debug
     mysensors: debug
 
-media_player:
-    - platform: braviatv
-      host: 192.168.42.101
