@@ -92,42 +92,42 @@
   action:
     service: switch.turn_off
     entity_id: switch.coffee_espresso_10_1
-- alias: Slack Coffee On
+- alias: Notify Coffee On
   trigger:
     platform: state
     entity_id: switch.coffee_espresso_10_0
     to: 'on'
   action:
-  - service: notify.slack
+  - service: notify.lannouncer_galaxys8
     data:
-      message: '@lnelson Coffee Maker Turned On'
-- alias: Slack Coffee Off
+      message: 'Coffee Maker Turned On'
+- alias: Notify Coffee Off
   trigger:
     platform: state
     entity_id: switch.coffee_espresso_10_0
     to: 'off'
   action:
-  - service: notify.slack
+  - service: notify.lannouncer_galaxys8
     data:
-      message: '@lnelson Coffee Maker Turned Off'
-- alias: Slack Espresso On
+      message: 'Coffee Maker Turned Off'
+- alias: Notify Espresso On
   trigger:
     platform: state
     entity_id: switch.coffee_espresso_10_1
     to: 'on'
   action:
-  - service: notify.slack
+  - service: notify.lannouncer_galaxys8
     data:
-      message: '@lnelson Espresso Machine Turned On'
-- alias: Slack Espresso Off
+      message: 'Espresso Machine Turned On'
+- alias: Notify Espresso Off
   trigger:
     platform: state
     entity_id: switch.coffee_espresso_10_1
     to: 'off'
   action:
-  - service: notify.slack
+  - service: notify.lannouncer_galaxys8
     data:
-      message: '@lnelson Espresso Machine Turned Off'
+      message: 'Espresso Machine Turned Off'
 - alias: Outside Lights on when arriving home
   trigger:
     platform: state

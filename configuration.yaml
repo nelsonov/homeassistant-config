@@ -221,8 +221,8 @@ google_assistant:
     client_id: !secret google_client_id
     access_token: !secret google_access_token
     agent_user_id: lnelson@nelnet.org
-#    api_key: [an API Key generated for the Google Actions project]
-    exposed__by_default: false
+    api_key: !secret google_api_key
+    expose_by_default: false
 
 notify:
     - name: slack
@@ -230,7 +230,9 @@ notify:
       platform: slack
       api_key: !secret slack_api_key
       default_channel: '#homeassistant'
-
+    - name: lannouncer_galaxys8
+      platform: lannouncer
+      host: 192.168.42.190
 device_tracker:
     - platform: owntracks_http
       max_gps_accuracy: 200

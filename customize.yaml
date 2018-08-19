@@ -1,8 +1,10 @@
 media_player.bedroom_tv:
+  google_assistant: false
   hidden: true
 switch.coffee_espresso_10_0:
   friendly_name: Coffee On/Off
   google_assistant: true
+  google_assistant_type: switch
   google_assistant_name: coffee
 switch.coffee_espresso_10_1:
   friendly_name: Espresso On/Off
@@ -38,24 +40,34 @@ switch.bedroom_monitors:
 sensor.tempsensorrfm95_202_2:
   friendly_name: Pump House Temp.
 binary_sensor.deck_westside_cam_control:
+  google_assistant: false
   hidden: true
 automation.deck_west_side_30min:
+  google_assistant: false
   hidden: true
 automation.deck_westside_cam_control_off:
+  google_assistant: false
   hidden: true
 automation.deck_westside_cam_control_on:
+  google_assistant: false
   hidden: true
 automation.coffee_on_when_not_home:
+  google_assistant: false
   hidden: true
 automation.coffe_on_when_not_home:
+  google_assistant: false
   hidden: true
 automation.slack_basement_door_light_on:
+  google_assistant: false
   hidden: true
 automation.outside_lights_on_when_arriving_home:
+  google_assistant: false
   hidden: true
 automation.slack_coffee_on:
+  google_assistant: false
   hidden: true
 automation.coffee_maker_3hr:
+  google_assistant: false
   friendly_name: Turn off after 3hrs
 automation.coffee_timer:
   hidden: true
@@ -66,8 +78,7 @@ sensor.shoprfm95_201_2:
 sensor.shoprfm95_201_3:
   friendly_name: Shop Light Level
 automation.coffee_button_onoff:
-  hidden: true
-binary_sensor.coffee_switch:
+  google_assistant: false
   hidden: true
 device_tracker.nexus5:
   hidden: true
@@ -78,10 +89,14 @@ device_tracker.garmin_drivesmart_3946630105:
 device_tracker.bluetooth_mouse:
   hidden: true
 group.all_automations:
+  google_assistant: false
   hidden: false
 group.all_devices:
+  google_assistant: false
   hidden: false
 group.all_lights:
+  google_assistant: false
   hidden: false
 group.all_switches:
+  google_assistant: false
   hidden: false
