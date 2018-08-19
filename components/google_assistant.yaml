@@ -1,0 +1,74 @@
+#Entries need to be indented, started with two spaces
+
+  project_id: nelnet.org:api-project-518332665370
+  client_id: !secret google_client_id
+  access_token: !secret google_access_token
+  agent_user_id: lnelson@nelnet.org
+  api_key: !secret google_api_key
+  expose_by_default: false
+
+  entity_config:
+    group.bedroomlights:
+      name: Bedroom Lights
+      aliases:
+        - bedroom lights
+        - bedroom
+      expose: true     
+      room: Bedroom
+    light.bedroom_front_light:
+      name: Bedroom Front Light
+      aliases:
+        - bedroom front light
+        - front light
+      expose: true     
+      room: Bedroom
+    light.bedroom_rear_light:
+      name: Bedroom Rear Light
+      aliases:
+        - bedroom rear light
+        - rear light
+      expose: true     
+      room: Bedroom
+    light.basement_fluorescent:
+      name: Basement Fluorescent Lights
+      aliases:
+        - basement lights
+      expose: true     
+      room: Basement
+    group.outsidelights:
+      name: Outside Lights
+      aliases:
+        - outside lights
+        - outdoor lights
+      expose: true     
+      room: Outside
+    switch.basement_mini_tv:
+      name: Basement TV
+      aliases:
+        - basement tv
+        - basement mini tv
+      expose: true
+      room: Basement
+    switch.bedroom_monitors:
+      name: Bedroom Monitors
+      aliases:
+        - monitors
+        - bedroom monitors
+      expose: true
+      room: Bedroom
+    switch.coffee_espresso_10_0:
+      name: Coffee Maker
+      aliases:
+        - coffee
+        - coffee maker
+      expose: true
+      room: Basement
+    switch.coffee_espresso_10_1:
+      name: Espresso Maker
+      aliases:
+        - espresso
+        - espresso maker
+      expose: true
+      room: Basement
+    
+        

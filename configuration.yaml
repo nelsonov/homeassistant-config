@@ -79,91 +79,20 @@ sun:
 tts:
   - platform: google
 
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
-
 mqtt:
   broker: 192.168.42.2
 
-light:
-  - platform: yeelight
-    devices:
-      192.168.42.130:
-        name: Deck Westside Light
-  - platform: mqtt
-    name: "Basement Fluorescent"
-    state_topic: "basement/light/fluorescent/stat/POWER"
-    command_topic: "basement/light/fluorescent/cmnd/power"
-    availability_topic: "basement/light/fluorescent/tele/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
-  - platform: mqtt
-    name: "Bedroom Front Light"
-    state_topic: "bedroom/light/front/stat/POWER"
-    command_topic: "bedroom/light/front/cmnd/power"
-    availability_topic: "bedroom/light/front/tele/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
-  - platform: mqtt
-    name: "Bedroom Rear Light"
-    state_topic: "bedroom/light/rear/stat/POWER"
-    command_topic: "bedroom/light/rear/cmnd/power"
-    availability_topic: "bedroom/light/rear/tele/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
-    
-switch:
-  - platform: mqtt
-    name: "Bedroom Monitors"
-    state_topic: "bedroom/devices/monitors/stat/POWER"
-    command_topic: "bedroom/devices/monitors/cmnd/power"
-    availability_topic: "bedroom/devices/monitors/tele/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
-    
-  - platform: mqtt
-    name: "Basement Mini TV"
-    state_topic: "basement/devices/mini-tv/stat/POWER"
-    command_topic: "basement/devices/mini-tv/cmnd/power"
-    availability_topic: "basement/devices/mini-tv/tele/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
-    
 
-mysensors:
-  gateways:
-    - device: '192.168.42.129'
-      tcp_port: 5003
-      persistence_file: "/home/homeassistant/mysensors_wifi.json"
-#    - device: /dev/ttyS0
-    - device: /dev/ttyAMA0
-      baud_rate: 9600
-      persistence_file: "/home/homeassistant/mysensors_ttyS0.json"
-  optimistic: false
-  persistence: true
-  retain: true
-  version: '2.0'
+group: !include groups.yaml
+automation: !include_dir_merge_list automations/
+script: !include scripts.yaml
+mysensors: !include components/mysensors.yaml
+light: !include_dir_merge_list lights/
+switch: !include_dir_merge_list switches/
+sensor: !include_dir_merge_list sensors/
+notify: !include components/notify.yaml
+device_tracker: !include components/tracker.yaml
+google_assistant: !include components/google_assistant.yaml
 
 binary_sensor:
   - platform: mqtt
@@ -172,21 +101,6 @@ binary_sensor:
     payload_on: "ON"
     payload_off: "OFF"
     qos: 2
-
-sensor:
-  - platform: mqtt
-    name: "Deck Westside Cam Filename"
-    state_topic: "home/westdeck/cam/filename"
-  - platform: mqtt
-    name: "Outside Under Deck Temp."
-    state_topic: "weewx/loop"
-    unit_of_measurement: '°F'
-    value_template: '{{ value_json.outTemp_F }}'
-  - platform: mqtt
-    name: "Inside Basement Temp."
-    state_topic: "weewx/loop"
-    unit_of_measurement: '°F'
-    value_template: '{{ value_json.inTemp_F }}'
 
 input_datetime:
   coffee_start:
@@ -197,12 +111,13 @@ input_datetime:
 input_boolean:
   coffee_timer_enable:
     name: Enable Coffee Timer
-    
-#camera:
-#  - platform: local_file
-#    name: "Westside Deck Camera"
-#    filepath: /media/cams/source/deck/tmp.jpg
-#    #filepath: "/media/cams/source/deck/source/{{ ('sensor.deck_westside_cam_filename') }}"
+
+zone:
+    - name: Home
+      latitude: 45.9553
+      longitude: -122.7622
+      radius: 500
+      icon: mdi:home
 
 history_graph:
   gr1:
@@ -216,43 +131,15 @@ history_graph:
     hours_to_show: 72
     # refresh: 0
 
-google_assistant:
-    project_id: nelnet.org:api-project-518332665370
-    client_id: !secret google_client_id
-    access_token: !secret google_access_token
-    agent_user_id: lnelson@nelnet.org
-    api_key: !secret google_api_key
-    expose_by_default: false
-
-notify:
-    - name: slack
-      username: home
-      platform: slack
-      api_key: !secret slack_api_key
-      default_channel: '#homeassistant'
-    - name: lannouncer_galaxys8
-      platform: lannouncer
-      host: 192.168.42.190
-device_tracker:
-    - platform: owntracks_http
-      max_gps_accuracy: 200
-      waypoints: True
-    - platform: bluetooth_tracker
-    - platform: ping
-      hosts:
-        lee_galaxys8_ping: 192.168.42.190
-      interval_seconds: 30
-      consider_home: 600
-      
-zone:
-    - name: Home
-      latitude: 45.9553
-      longitude: -122.7622
-      radius: 500
-      icon: mdi:home
 logger:
   default: info
-  logs:
-    homeassistant.components.mysensors: debug
-    mysensors: debug
+#  logs:
+#    homeassistant.components.mysensors: debug
+#    mysensors: debug
+
+#camera:
+#  - platform: local_file
+#    name: "Westside Deck Camera"
+#    filepath: /media/cams/source/deck/tmp.jpg
+#    #filepath: "/media/cams/source/deck/source/{{ ('sensor.deck_westside_cam_filename') }}"
 

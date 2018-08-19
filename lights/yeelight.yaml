@@ -1,0 +1,4 @@
+  - platform: yeelight
+    devices:
+      192.168.42.130:
+        name: Deck Westside Light

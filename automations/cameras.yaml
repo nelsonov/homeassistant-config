@@ -1,0 +1,16 @@
+- alias: Deck Westside Cam Control OFF
+  trigger:
+    platform: state
+    entity_id: binary_sensor.deck_westside_cam_control
+    from: 'on'
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: light.deck_westside_light
+
+    
+
+
+
+
+    

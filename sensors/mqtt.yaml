@@ -1,0 +1,14 @@
+  - platform: mqtt
+    name: "Deck Westside Cam Filename"
+    state_topic: "home/westdeck/cam/filename"
+  - platform: mqtt
+    name: "Outside Under Deck Temp."
+    state_topic: "weewx/loop"
+    unit_of_measurement: '°F'
+    value_template: '{{ value_json.outTemp_F }}'
+  - platform: mqtt
+    name: "Inside Basement Temp."
+    state_topic: "weewx/loop"
+    unit_of_measurement: '°F'
+    value_template: '{{ value_json.inTemp_F }}'
+

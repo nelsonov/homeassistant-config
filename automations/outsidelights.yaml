@@ -1,0 +1,33 @@
+- alias: Deck Westside Cam Control ON
+  trigger:
+    platform: state
+    entity_id: binary_sensor.deck_westside_cam_control
+    from: 'off'
+    to: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.deck_westside_light
+- alias: Deck West Side 30min
+  trigger:
+    platform: state
+    entity_id: light.deck_westside_light
+    to: 'on'
+    for:
+      minutes: 30
+  action:
+    service: light.turn_off
+    entity_id: light.deck_westside_light
+- alias: Outside Lights on when arriving home
+  trigger:
+    platform: state
+    entity_id: device_tracker.lee_nexus5, device_tracker.lee_nexus5_ping
+    from: not_home
+    to: home
+  condition:
+    condition: sun
+    after: sunset
+  action:
+  - service: light.turn_on
+    entity_id: light.deck_westside_light
+  - service: switch.turn_on
+    entity_id: switch.relay__button_1_1

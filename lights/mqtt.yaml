@@ -1,0 +1,34 @@
+  - platform: mqtt
+    name: "Basement Fluorescent"
+    state_topic: "basement/light/fluorescent/stat/POWER"
+    command_topic: "basement/light/fluorescent/cmnd/power"
+    availability_topic: "basement/light/fluorescent/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+  - platform: mqtt
+    name: "Bedroom Front Light"
+    state_topic: "bedroom/light/front/stat/POWER"
+    command_topic: "bedroom/light/front/cmnd/power"
+    availability_topic: "bedroom/light/front/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+  - platform: mqtt
+    name: "Bedroom Rear Light"
+    state_topic: "bedroom/light/rear/stat/POWER"
+    command_topic: "bedroom/light/rear/cmnd/power"
+    availability_topic: "bedroom/light/rear/tele/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+    

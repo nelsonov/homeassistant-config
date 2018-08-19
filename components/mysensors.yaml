@@ -1,0 +1,14 @@
+#Entries need to be indented, started with two spaces
+
+  gateways:
+    - device: '192.168.42.129'
+      tcp_port: 5003
+      persistence_file: "/home/homeassistant/mysensors_wifi.json"
+#    - device: /dev/ttyS0
+    - device: /dev/ttyAMA0
+      baud_rate: 9600
+      persistence_file: "/home/homeassistant/mysensors_ttyS0.json"
+  optimistic: false
+  persistence: true
+  retain: true
+  version: '2.0'

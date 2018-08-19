@@ -1,0 +1,71 @@
+- alias: Bedroom Lights Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '2'
+  action:
+  - service: homeassistant.toggle
+    entity_id: group.bedroomlights
+
+- alias: Basement Lights Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '3'
+  action:
+  - service: light.toggle
+    entity_id: light.basement_fluorescent
+
+- alias: Basement TV Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '4'
+  action:
+  - service: switch.toggle
+    entity_id: switch.basement_mini_tv
+
+- alias: Bedroom Monitors Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '5'
+  action:
+  - service: switch.toggle
+    entity_id: switch.bedroom_monitors
+
+- alias: Coffee Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '6'
+  action:
+  - service: switch.toggle
+    entity_id: switch.coffee_espresso_10_0
+
+- alias: Espresso Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '7'
+  action:
+  - service: switch.toggle
+    entity_id: switch.coffee_espresso_10_1
+
+- alias: Bedroom Front Light Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '8'
+  action:
+  - service: light.toggle
+    entity_id: light.bedroom_front_light
+
+- alias: Bedroom Rear Light Remote
+  trigger:
+    platform: state
+    entity_id: sensor.ir_rxtx_12_1
+    to: '9'
+  action:
+  - service: light.toggle
+    entity_id: light.bedroom_rear_light
