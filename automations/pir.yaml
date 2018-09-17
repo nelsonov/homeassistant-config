@@ -1,0 +1,11 @@
+- alias: Bedroom PIR On
+  trigger: 
+    platform: state
+    entity_id: binary_sensor.ir_rxtx_12_5
+    to: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id:
+        - light.bedroom_front_light
+        - light.bedroom_rear_light
