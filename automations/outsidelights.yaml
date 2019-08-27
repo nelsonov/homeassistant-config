@@ -7,7 +7,7 @@
   action:
     service: light.turn_on
     entity_id: light.deck_westside_light
-- alias: Deck West Side 30min
+- alias: Deck West Side Light 30min
   trigger:
     platform: state
     entity_id: light.deck_westside_light
@@ -15,12 +15,24 @@
     for:
       minutes: 30
   action:
-    service: light.turn_off
+  - service: light.turn_off
     entity_id: light.deck_westside_light
+- alias: Basement Door Light 30min
+  trigger:
+    platform: state
+    entity_id: switch.relay__button_1_1
+    to: 'on'
+    for:
+      minutes: 30
+  action:
+  - service: switch.turn_off
+    entity_id: switch.relay__button_1_1
+
 - alias: Outside Lights on when arriving home
   trigger:
     platform: state
-    entity_id: device_tracker.lee_nexus5, device_tracker.lee_nexus5_ping
+#    entity_id: device_tracker.lee_galaxys8, device_tracker.lee_galaxys8_ping
+    entity_id: group.presence
     from: not_home
     to: home
   condition:

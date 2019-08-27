@@ -26,50 +26,6 @@
   action:
     service: switch.turn_off
     entity_id: switch.coffee_espresso_10_0
-- alias: Coffee Maker 3hr
-  trigger:
-    platform: state
-    entity_id: switch.coffee_espresso_10_0
-    to: 'on'
-    for:
-      hours: 3
-  action:
-    service: switch.turn_off
-    entity_id: switch.coffee_espresso_10_0
-- alias: Notify Coffee On
-  trigger:
-    platform: state
-    entity_id: switch.coffee_espresso_10_0
-    to: 'on'
-  action:
-  - service: notify.lannouncer_galaxys8
-    data:
-      message: 'Coffee Maker Turned On'
-- alias: Notify Coffee Off
-  trigger:
-    platform: state
-    entity_id: switch.coffee_espresso_10_0
-    to: 'off'
-  action:
-  - service: notify.lannouncer_galaxys8
-    data:
-      message: 'Coffee Maker Turned Off'
-- alias: Coffee On when Not Home
-  trigger:
-    platform: state
-    entity_id: device_tracker.lee_galaxys8
-    to: not_home
-    for:
-      minutes: 10
-  condition:
-    condition: state
-    entity_id: switch.coffee_espresso_10_0
-    state: 'on'
-  action:
-  - service: notify.slack
-    data:
-      message: '@lnelson Coffee Still On'
-
 - alias: Coffee Timer
   trigger:
     platform: time
@@ -84,5 +40,5 @@
         value_template: '{{ now().hour == (states.input_datetime.coffee_start.attributes.hour  | round(0)) and  now().minute == (states.input_datetime.coffee_start.attributes.minute  | round(0) )  }}'
   action:
     service: switch.turn_on
-    entity_id: switch.coffee_maker_downstairs
+    entity_id: switch.coffee_espresso_10_0
 

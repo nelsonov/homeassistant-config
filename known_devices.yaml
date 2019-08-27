@@ -57,6 +57,14 @@ lee_galaxys8_ping:
   hide_if_away: false
   icon:
   mac:
-  name: lee galaxys8 ping
+  name: galaxys8 ping
+  picture:
+  track: true
+
+lee_galaxys8:
+  hide_if_away: false
+  icon:
+  mac:
+  name: galaxys8 gps
   picture:
   track: true

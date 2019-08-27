@@ -14,8 +14,7 @@
     to: 'off'
   action:
     service: switch.turn_off
-    data:
-      entity_id: switch.coffee_espresso_10_1
+    entity_id: switch.coffee_espresso_10_1
 - alias: Espresso Machine 30min
   trigger:
     platform: state
@@ -26,21 +25,3 @@
   action:
     service: switch.turn_off
     entity_id: switch.coffee_espresso_10_1
-- alias: Notify Espresso On
-  trigger:
-    platform: state
-    entity_id: switch.coffee_espresso_10_1
-    to: 'on'
-  action:
-  - service: notify.lannouncer_galaxys8
-    data:
-      message: 'Espresso Machine Turned On'
-- alias: Notify Espresso Off
-  trigger:
-    platform: state
-    entity_id: switch.coffee_espresso_10_1
-    to: 'off'
-  action:
-  - service: notify.lannouncer_galaxys8
-    data:
-      message: 'Espresso Machine Turned Off'

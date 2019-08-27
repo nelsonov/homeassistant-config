@@ -132,14 +132,15 @@ history_graph:
     # refresh: 0
 
 logger:
-  default: info
-#  logs:
+  default: warn
+  logs:
 #    homeassistant.components.mysensors: debug
 #    mysensors: debug
-
+    homeassistant.components.mysensors: warn
+    mysensors: warn
+    homeassistant.components.http.view: debug
 #camera:
 #  - platform: local_file
 #    name: "Westside Deck Camera"
 #    filepath: /media/cams/source/deck/tmp.jpg
 #    #filepath: "/media/cams/source/deck/source/{{ ('sensor.deck_westside_cam_filename') }}"
-

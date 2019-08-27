@@ -7,6 +7,6 @@
   - platform: ping
     hosts:
       lee_galaxys8_ping: 192.168.42.190
-    interval_seconds: 30
-    consider_home: 600
+    interval_seconds: 10
+    consider_home: 1800
       
