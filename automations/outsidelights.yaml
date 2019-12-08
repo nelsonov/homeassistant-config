@@ -6,27 +6,27 @@
     to: 'on'
   action:
     service: light.turn_on
-    entity_id: light.deck_westside_light
+    entity_id: light.yeelight_mono1_34ce0088229a
 - alias: Deck West Side Light 30min
   trigger:
     platform: state
-    entity_id: light.deck_westside_light
+    entity_id: light.yeelight_mono1_34ce0088229a
     to: 'on'
     for:
       minutes: 30
   action:
   - service: light.turn_off
-    entity_id: light.deck_westside_light
+    entity_id: light.yeelight_mono1_34ce0088229a
 - alias: Basement Door Light 30min
   trigger:
     platform: state
-    entity_id: switch.relay__button_1_1
+    entity_id: switch.relay_button_1_1
     to: 'on'
     for:
       minutes: 30
   action:
   - service: switch.turn_off
-    entity_id: switch.relay__button_1_1
+    entity_id: switch.relay_button_1_1
 
 - alias: Outside Lights on when arriving home
   trigger:
@@ -40,6 +40,6 @@
     after: sunset
   action:
   - service: light.turn_on
-    entity_id: light.deck_westside_light
+    entity_id: light.yeelight_mono1_34ce0088229a
   - service: switch.turn_on
-    entity_id: switch.relay__button_1_1
+    entity_id: switch.relay_button_1_1

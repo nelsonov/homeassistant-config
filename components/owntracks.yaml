@@ -1,0 +1,7 @@
+#Entries need to be indented, started with two spaces
+
+  max_gps_accuracy: 200
+  waypoints: true
+  waypoints_whitelist:
+    - lnelson
+  

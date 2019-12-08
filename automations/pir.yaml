@@ -1,7 +1,7 @@
 - alias: Bedroom PIR On
   trigger: 
     platform: state
-    entity_id: binary_sensor.ir_rxtx_12_5
+    entity_id: binary_sensor.ir_rx_tx_12_5
     to: 'on'
   condition:
     condition: state
@@ -17,7 +17,7 @@
 - alias: Basement PIR On
   trigger: 
     platform: state
-    entity_id: binary_sensor.ir_rxtx_13_5
+    entity_id: binary_sensor.ir_rx_tx_13_5
     to: 'on'
   action:
     service: light.turn_on
@@ -27,7 +27,7 @@
 - alias: Basement PIR Timer
   trigger:
     platform: state
-    entity_id: binary_sensor.ir_rxtx_13_5
+    entity_id: binary_sensor.ir_rx_tx_13_5
     to: 'off'
     for:
       minutes: 10

@@ -1,0 +1,38 @@
+
+#- alias: Clementine Pause
+#  trigger:
+#    platform: state
+#    entity_id: clementine_pause
+#    to: 'on'
+#  action:
+#    service: media_play_pause
+  
+
+
+#^#- alias: Espresso Button On
+#^#  trigger:
+#^#    platform: state
+#^#    entity_id: switch.coffee_espresso_10_1
+#^#    to: 'on'
+#^#  action:
+#^#    service: switch.turn_on
+#^#    data:
+#^#      entity_id: switch.coffee_espresso_10_1
+#^#- alias: Espresso Button Off
+#^#  trigger:
+#^#    platform: state
+#^#    entity_id: switch.coffee_espresso_10_1
+#^#    to: 'off'
+#^#  action:
+#^#    service: switch.turn_off
+#^#    entity_id: switch.coffee_espresso_10_1
+#^#- alias: Espresso Machine 30min
+#^#  trigger:
+#^#    platform: state
+#^#    entity_id: switch.coffee_espresso_10_1
+#^#    to: 'on'
+#^#    for:
+#^#      minutes: 30
+#^#  action:
+#^#    service: switch.turn_off
+#^#    entity_id: switch.coffee_espresso_10_1

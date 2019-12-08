@@ -1,3 +1,5 @@
+light.yeelight_mono1_34ce0088229a:
+  friendly_name: Deck Westside Light
 media_player.bedroom_tv:
   google_assistant: false
   hidden: true
@@ -23,14 +25,10 @@ light.bedroom_rear_light:
 group.bedroomlights:
   google_assistant: true
   google_assistant_name: bedroom lights
-switch.relay__button_1_1:
+switch.relay_button_1_1:
   friendly_name: Basement Door Lights
   google_assistant: true
   google_assistant_name: basement door light
-light.deck_westside_light:
-  friendly_name: Deck Westside Light
-  google_assistant: true
-  google_assistant_name: deck light
 switch.basement_mini_tv:
   google_assistant: true
   google_assistant_name: basement tv

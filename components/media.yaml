@@ -1,0 +1,4 @@
+#Entries need to be indented, started with two spaces
+
+  - platform: clementine
+    host: 192.168.42.101

@@ -76,8 +76,8 @@ coffeetimer:
 outsidelights:
   name: Outdoor Lights
   entities:
-    - light.deck_westside_light
-    - switch.relay__button_1_1
+    - light.yeelight_mono1_34ce0088229a
+    - switch.relay_button_1_1
     - automation.basement_door_30min
 
 basementlights:

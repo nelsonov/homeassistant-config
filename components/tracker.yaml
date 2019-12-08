@@ -1,12 +1,12 @@
 #Entries need to be indented, started with two spaces
 
-  - platform: owntracks_http
-    max_gps_accuracy: 200
-    waypoints: True
-  - platform: bluetooth_tracker
+#  - platform: owntracks_http
+#    max_gps_accuracy: 200
+#    waypoints: True
+#  - platform: bluetooth_tracker
   - platform: ping
     hosts:
-      lee_galaxys8_ping: 192.168.42.190
-    interval_seconds: 10
-    consider_home: 1800
+      lee_galaxys8_ping: 192.168.42.23
+      interval_seconds: 10
+      consider_home: 1800
       

@@ -2,8 +2,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '2'
   condition:
     condition: state
@@ -18,8 +18,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '2'
   condition:
     condition: state
@@ -34,8 +34,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '3'
   action:
   - service: light.toggle
@@ -45,8 +45,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '4'
   action:
   - service: switch.toggle
@@ -56,8 +56,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '5'
   action:
   - service: switch.toggle
@@ -67,8 +67,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '6'
   action:
   - service: switch.toggle
@@ -78,8 +78,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '7'
   action:
   - service: switch.toggle
@@ -89,8 +89,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '8'
   action:
   - service: light.toggle
@@ -100,8 +100,8 @@
   trigger:
     platform: state
     entity_id:
-      - sensor.ir_rxtx_12_1
-      - sensor.ir_rxtx_13_1
+      - sensor.ir_rx_tx_12_1
+      - sensor.ir_rx_tx_13_1
     to: '9'
   action:
   - service: light.toggle

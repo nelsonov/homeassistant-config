@@ -1,12 +1,11 @@
 #Entries need to be indented, started with two spaces
 
-  project_id: nelnet.org:api-project-518332665370
-  client_id: !secret google_client_id
-  access_token: !secret google_access_token
-  agent_user_id: lnelson@nelnet.org
+  project_id: nelnet.org:homeassistant2-2febe
   api_key: !secret google_api_key
+#  service_account: !include homeassistant-17ad4cfd50b3.json
+#  agent_user_id: lnelson@nelnet.org
+  report_state: false
   expose_by_default: false
-
   entity_config:
     group.bedroomlights:
       name: Bedroom Lights
@@ -30,7 +29,7 @@
       expose: true     
       room: Bedroom
     light.basement_fluorescent:
-      name: Basement Fluorescent Lights
+      name: Basement Lights
       aliases:
         - basement lights
       expose: true     
@@ -57,18 +56,21 @@
       expose: true
       room: Bedroom
     switch.coffee_espresso_10_0:
-      name: Coffee Maker
+      name: Coffee
       aliases:
         - coffee
         - coffee maker
       expose: true
       room: Basement
     switch.coffee_espresso_10_1:
-      name: Espresso Maker
+      name: Espresso
       aliases:
         - espresso
         - espresso maker
       expose: true
       room: Basement
-    
-        
+    media_player.clementine_remote:
+      name: Clementine
+      expose: true
+      room: Bedroom
+      
