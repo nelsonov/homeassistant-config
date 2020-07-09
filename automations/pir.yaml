@@ -14,6 +14,15 @@
         - light.bedroom_front_light
         - light.bedroom_rear_light
 
+#- alias: Bedroom Motion Sensor On
+#  trigger:
+#    platfrom: state
+#    entity_id: input_boolean.bedroom_pir_enable
+#    to: 'off'
+#  action:
+#    service: automation.turn_off
+#    entity_id: automation.bedroom_pir_on
+    
 - alias: Basement PIR On
   trigger: 
     platform: state
@@ -21,8 +30,7 @@
     to: 'on'
   action:
     service: light.turn_on
-    data:
-      entity_id: light.basement_fluorescent
+    entity_id: light.basement_fluorescent
 
 - alias: Basement PIR Timer
   trigger:

@@ -1,0 +1,6 @@
+ - platform: command_line
+   switches:
+     shopcam_display:
+       command_on: "ssh lnelson@nuc01 '/home/lnelson/shopcam.sh < /dev/null 2>&1 > /dev/null &'"
+       command_off: "ssh lnelson@nuc01 'pkill vlc'"
+       friendly_name: Shopcam Display

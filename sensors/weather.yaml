@@ -1,0 +1,5 @@
+  - platform: openweathermap
+    api_key: !secret openweather
+    monitored_conditions:
+      - weather
+    forecast: true

@@ -98,3 +98,8 @@ group.all_lights:
 group.all_switches:
   google_assistant: false
   hidden: false
+sensor.outside_under_deck_temp:
+  device_class: temperature
+sensor.inside_basement_temp:
+  device_class: temperature
+  

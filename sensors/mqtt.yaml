@@ -1,7 +1,4 @@
   - platform: mqtt
-    name: "Deck Westside Cam Filename"
-    state_topic: "home/westdeck/cam/filename"
-  - platform: mqtt
     name: "Outside Under Deck Temp."
     state_topic: "weewx/loop"
     unit_of_measurement: '°F'
@@ -11,4 +8,19 @@
     state_topic: "weewx/loop"
     unit_of_measurement: '°F'
     value_template: '{{ value_json.inTemp_F }}'
+  - platform: mqtt
+    name: "Outside Humidity"
+    state_topic: "weewx/loop"
+    unit_of_measurement: '%'
+    value_template: '{{ value_json.outHumidity }}'    
+  - platform: mqtt
+    name: "Basement Humidity"
+    state_topic: "weewx/loop"
+    unit_of_measurement: '%'
+    value_template: '{{ value_json.inHumidity }}'    
+  - platform: mqtt
+    name: "Barametric Pressure"
+    state_topic: "weewx/loop"
+    unit_of_measurement: 'inHg'
+    value_template: '{{ value_json.barometer_inHg }}'    
 

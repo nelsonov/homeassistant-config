@@ -1,13 +1,11 @@
 #Entries need to be indented, started with two spaces
-
   gateways:
     - device: '192.168.42.129'
-      persistence_file: '/home/homeassistant/mysensors_wifi.json'
+      persistence_file: '/home/homeassistant/mysensors_nrf24.json'
       tcp_port: 5003
-#    - device: /dev/ttyS0
-#    - device: /dev/ttyAMA0
-#      baud_rate: 9600
-#      persistence_file: "/home/homeassistant/mysensors_ttyS0.json"
+    - device: '192.168.42.142'
+      persistence_file: '/home/homeassistant/mysensors_rfm95.json'
+      tcp_port: 5003
   optimistic: false
   persistence: true
   retain: true

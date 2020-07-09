@@ -20,8 +20,9 @@ lightview:
   view: yes
   icon: mdi:lightbulb
   entities:
-    - group.basementlights
     - group.bedroomlights
+    - automation.bedroom_pir_on
+    - group.basementlights
     - group.outsidelights
 
 mediaview:
@@ -90,6 +91,13 @@ bedroomlights:
   entities:
     - light.bedroom_front_light
     - light.bedroom_rear_light
+
+bedroomlights_sensor:
+  name: Bedroom Lights With Sensor
+  entities:
+    - light.bedroom_front_light
+    - light.bedroom_rear_light
+    - automation.bedroom_pir_on
 
 weather:
   name: Weather

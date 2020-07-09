@@ -14,6 +14,13 @@
         - bedroom
       expose: true     
       room: Bedroom
+    input_boolean.bedroom_pir_enable:
+      name: Bedroom Motion Sensor
+      aliases:
+        - bedroom motion
+        - motion sensor
+      expose: true     
+      room: Bedroom
     light.bedroom_front_light:
       name: Bedroom Front Light
       aliases:
@@ -55,6 +62,13 @@
         - bedroom monitors
       expose: true
       room: Bedroom
+    switch.shopcam_display:
+      name: Shopcam
+      aliases:
+        - shopcam display
+        - shopcam nuc01
+      expose: true
+      room: Bedroom
     switch.coffee_espresso_10_0:
       name: Coffee
       aliases:
@@ -73,4 +87,19 @@
       name: Clementine
       expose: true
       room: Bedroom
-      
+    sensor.outside_under_deck_temp:
+      name: Outside Temperature
+      aliases:
+        - Temp
+        - Temperature
+        - Outside Temp
+      expose: true
+      room: Outside
+    sensor.inside_basement_temp:
+      name: Basement Temperature
+      aliases:
+        - Basement Temp
+      expose: true
+      room: Basement
+
+

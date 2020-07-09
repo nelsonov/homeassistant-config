@@ -21,7 +21,7 @@ homeassistant:
 # Enable the auth component
 auth:
 
-#cloud:
+cloud:
 
 # Show links to resources in log and frontend
 #introduction:
@@ -94,18 +94,6 @@ mqtt:
   broker: 192.168.42.5
 
 
-#group: !include groups.yaml
-automation: !include_dir_merge_list automations/
-script: !include scripts.yaml
-mysensors: !include components/mysensors.yaml
-light: !include_dir_merge_list lights/
-switch: !include_dir_merge_list switches/
-sensor: !include_dir_merge_list sensors/
-notify: !include components/notify.yaml
-device_tracker: !include components/tracker.yaml
-google_assistant: !include components/google_assistant.yaml
-media_player: !include components/media.yaml
-
 binary_sensor:
   - platform: mqtt
     name: "Deck Westside Cam Control"
@@ -113,6 +101,142 @@ binary_sensor:
     payload_on: "ON"
     payload_off: "OFF"
     qos: 2
+  - platform: ping
+    name: vlan42_gw
+    host: 192.168.42.1
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: fwr01
+    host: 192.168.40.1
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: fwr02
+    host: 192.168.40.4
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: rtr01
+    host: 192.168.40.2
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: rtr02
+    host: 192.168.40.3
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: rtr03
+    host: 192.168.40.5
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: satellite
+    host: 192.168.41.1
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: bsd04
+    host: 192.168.42.114
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: nuc01
+    host: 192.168.42.101
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: nuc02
+    host: 192.168.42.102
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: nuc03
+    host: 192.168.42.103
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: nuc-floatip
+    host: 192.168.42.9
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: rpi06
+    host: 192.168.42.6
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: laser-printer
+    host: 192.168.42.11
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: inkjet-printer
+    host: 192.168.42.13
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: mys01
+    host: 192.168.42.129
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: decklight
+    host: 192.168.42.130
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: basement_light
+    host: 192.168.42.131
+    count: 2
+    scan_interval: 190
+  - platform: ping
+    name: bedroom_front
+    host: 192.168.42.132
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: bedroom_rear
+    host: 192.168.42.133
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: monitors
+    host: 192.168.42.134
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: basement_tv
+    host: 192.168.42.135
+    count: 2
+    scan_interval: 180
+  - platform: ping
+    name: manager01
+    host: 35.185.199.34
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: manager02
+    host: 35.185.195.26
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: manager03
+    host: 104.196.253.14
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: bsd01-sea
+    host: 149.248.35.138
+    count: 2
+    scan_interval: 60
+  - platform: ping
+    name: bsd01-lax
+    host: 149.248.12.248
+    count: 2
+    scan_interval: 60
+
 
 input_datetime:
   coffee_start:
@@ -123,7 +247,23 @@ input_datetime:
 input_boolean:
   coffee_timer_enable:
     name: Enable Coffee Timer
+    initial: 'off'
+  bedroom_pir_enable:
+    name: Bedroom Motion Sensor
+    initial: 'on'
 
+#group: !include groups.yaml
+automation: !include_dir_merge_list automations/
+script: !include scripts.yaml
+mysensors: !include components/mysensors.yaml
+light: !include_dir_merge_list lights/
+switch: !include_dir_merge_list switches/
+sensor: !include_dir_merge_list sensors/
+notify: !include components/notify.yaml
+device_tracker: !include components/tracker.yaml
+#google_assistant: !include components/google_assistant.yaml
+media_player: !include components/media.yaml
+#climate: !include_dir_merge_list climate/
 zone:
     - name: Home
       latitude: 45.9553
@@ -131,31 +271,44 @@ zone:
       radius: 500
       icon: mdi:home
 
-history_graph:
-  gr1:
-    name: Temperatures
-    entities:
-      - sensor.tempsensorrfm95_202_2
-      - sensor.shoprfm95_201_2
-      - sensor.outside_under_deck_temp
-      - sensor.inside_basement_temp
-    #  - sensor.inside_temperature
-    hours_to_show: 72
-    # refresh: 0
+# (Will be) Removed 0.107.0      
+#history_graph:
+#  gr1:
+#    name: Temperatures
+#    entities:
+#      - sensor.tempsensorrfm95_202_2
+#      - sensor.shoprfm95_201_2
+#      - sensor.outside_under_deck_temp
+#      - sensor.inside_basement_temp
+#    #  - sensor.inside_temperature
+#    hours_to_show: 72
+#    # refresh: 0
 
 logger:
-#  default: warn
-  default: debug
+  default: warn
+#  default: debug
   logs:
-#    homeassistant.components.mysensors: debug
-#    mysensors: debug
-    homeassistant.components.mysensors: warn
-    mysensors: warn
+    homeassistant.components.mysensors: debug
+    mysensors: debug
+#    homeassistant.components.mysensors: warn
+#    mysensors: warn
 #    homeassistant.components.http.view: debug
-    homeassistant.components.google_assistant: debug
+#    homeassistant.components.google_assistant: debug
+#    hass_nabucasa: debug
+#    snitun: debug
+
+#coinbase:
+#  api_key: !secret coinbase_api_key
+#  api_secret: !secret coinbase_api_secret
+
 
 #camera:
 #  - platform: local_file
 #    name: "Westside Deck Camera"
 #    filepath: /media/cams/source/deck/tmp.jpg
-#    #filepath: "/media/cams/source/deck/source/{{ ('sensor.deck_westside_cam_filename') }}"
+
+#weather:
+#  - platform: openweathermap
+#    api_key: !secret openweather
+#    mode: daily
+
